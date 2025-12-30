@@ -3,12 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { signInWithCredentials } from "@/lib/actions/user.actions";
 import { useSearchParams } from "next/navigation";
 
+import PasswordInput from "@/components/shared/PasswordInput";
+
 const SignInForm = () => {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
   const [data, action] = useActionState(signInWithCredentials, {
     success: false,
     message: "",
@@ -18,7 +24,11 @@ const SignInForm = () => {
   const SignInButton = () => {
     const { pending } = useFormStatus();
     return (
-      <Button disabled={pending} className="w-full" variant="default">
+      <Button
+        disabled={pending}
+        className="w-full cursor-pointer"
+        variant="default"
+      >
         {pending ? "Signing In..." : "Sign In"}
       </Button>
     );
@@ -34,17 +44,15 @@ const SignInForm = () => {
             type="email"
             required
             placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
           />
         </div>
-        <div>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-          />
-        </div>
+        <PasswordInput
+          password={form.password}
+          placeholder="Password"
+          onChange={(val) => setForm((p) => ({ ...p, password: val }))}
+        />
         <div>
           <SignInButton />
         </div>

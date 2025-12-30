@@ -58,7 +58,7 @@ const MenuCard = ({ product }: { product: Product }) => {
               </div>
               {product.description && (
                 <DialogDescription>
-                  <span className="block font-bold">{product.nameChinese}</span>
+                  <span className="block font-bold">{product.subname}</span>
                   <span>{product.description}</span>
                 </DialogDescription>
               )}

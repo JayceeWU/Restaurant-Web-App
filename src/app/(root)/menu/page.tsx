@@ -1,7 +1,9 @@
 import MenuList from "./MenuList";
-import { getAllProducts } from "@/lib/actions/product.actions";
-import { MENU_CATEGORIES } from "@/lib/constants";
-import CategoryNav from "./CategoryNav";
+import {
+  getAllProducts,
+  getAllCategories,
+} from "@/lib/actions/product.actions";
+import CategoryNav from "@/components/shared/product/CategoryNav";
 
 export const metadata = {
   title: "Menu",
@@ -9,10 +11,11 @@ export const metadata = {
 
 const Menu = async () => {
   const allProducts = await getAllProducts();
+  const allCategories = await getAllCategories();
   return (
     <div className="md:flex md:gap-8 md:px-10 xl:px-28 mx-auto">
       <aside className="contents md:block md:w-60 md:shrink-0">
-        <CategoryNav categories={["Featured", ...MENU_CATEGORIES]} />
+        <CategoryNav categories={["Featured", ...allCategories]} />
       </aside>
       <main className="flex-1 space-y-12 md:py-8">
         <div id="section-featured">
@@ -21,7 +24,7 @@ const Menu = async () => {
             category="Featured"
           />
         </div>
-        {MENU_CATEGORIES.map((category) => (
+        {allCategories.map((category) => (
           <div
             id={`section-${category.toLowerCase().replace(/\s+/g, "-")}`}
             key={category}

@@ -8,6 +8,7 @@ import {
 import SignInForm from "./SignInForm";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import GoogleOAuth from "./GoogleOAuth";
 
 export const metadata = {
   title: "Sign In",
@@ -32,6 +33,7 @@ const SignInPage = async (props: {
         </CardHeader>
         <CardContent className="space-y-4">
           <SignInForm />
+          <GoogleOAuth />
         </CardContent>
       </Card>
     </div>

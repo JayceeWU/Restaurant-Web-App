@@ -18,6 +18,7 @@ import { signOutUser } from "@/lib/actions/user.actions";
 const NavMobile = async () => {
   const session = await auth();
   const firstName = session?.user?.name?.toUpperCase().split(" ")[0] || "User";
+  const isAdmin = session?.user?.role?.toLowerCase() === "admin" || false;
 
   return (
     <div className="header-md:hidden ml-auto">
@@ -38,12 +39,7 @@ const NavMobile = async () => {
             <VisuallyHidden>
               <SheetDescription>Mobile navigation menu</SheetDescription>
             </VisuallyHidden>
-            <SheetClose asChild>
-              <Button asChild variant="ghost" className="w-full justify-center">
-                <Link href="/">Home</Link>
-              </Button>
-            </SheetClose>
-            {session && (
+            {isAdmin && (
               <SheetClose asChild>
                 <Button
                   asChild

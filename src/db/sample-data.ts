@@ -6,21 +6,132 @@ const sampleData = {
       name: "Jaycee WU",
       email: "jaycee.wu@example.com",
       passwordHash: hashSync("SecurePassword@123", 10),
-      role: "admin",
+      role: "ADMIN",
     },
     {
-      name: "New Customer",
-      email: "new.customer@example.com",
+      name: "Test Customer",
+      email: "test.customer@example.com",
       passwordHash: hashSync("SecurePassword@123", 10),
-      role: "user",
+      role: "USER",
+    },
+  ],
+  categorys: [
+    {
+      id: "cmjrvvn4f000104kz0tha3e2s",
+      name: "Starters",
+      subname: "前菜",
+      sequence: 1,
+    },
+    {
+      id: "cmjrvvzkq000204kz271oh469",
+      name: "Mains",
+      subname: "主菜",
+      sequence: 2,
+    },
+    {
+      id: "cmjrvw3v9000304kzdggici7w",
+      name: "Staples",
+      subname: "主食",
+      sequence: 3,
+    },
+    {
+      id: "cmjrvw6xj000404kza1i7cblj",
+      name: "Greens",
+      subname: "蔬菜",
+      sequence: 4,
+    },
+    {
+      id: "cmjrvwbcc000004jxgyjfhprg",
+      name: "Desserts",
+      subname: "甜点",
+      sequence: 5,
+    },
+    {
+      id: "cmjrvwdzc000104jxac0d29lj",
+      name: "Drinks",
+      subname: "饮品",
+      sequence: 6,
+    },
+  ],
+  customizations: [
+    {
+      productId: "cmjrx3a4j000104kzfzmb2b4q",
+      required: true,
+      name: "Spice Level",
+      subname: "辣度",
+      options: [
+        { name: "No Spice", subname: "微辣", additionalPrice: 0 },
+        { name: "Mild", subname: "微辣", additionalPrice: 0 },
+        { name: "Medium", subname: "中辣", additionalPrice: 0 },
+        { name: "Hot", subname: "辣", additionalPrice: 0 },
+        { name: "Very Hot", subname: "特辣", additionalPrice: 0 },
+      ],
+      maxOptions: 1,
+    },
+    {
+      productId: "cmjrx3a4j000104kzfzmb2b4q",
+      required: true,
+      name: "Size",
+      subname: "份量",
+      options: [
+        { name: "Small", subname: "小份", additionalPrice: 0 },
+        { name: "Medium", subname: "中份", additionalPrice: 3 },
+        { name: "Large", subname: "大份", additionalPrice: 5 },
+      ],
+      maxOptions: 1,
+    },
+    {
+      productId: "cmjrx3a4j000104kzfzmb2b4q",
+      required: true,
+      name: "Side",
+      subname: "配菜",
+      options: [
+        { name: "Sprouts", subname: "豆芽", additionalPrice: 0 },
+        { name: "Cucumber", subname: "黄瓜", additionalPrice: 0 },
+        { name: "Needle Mushroom", subname: "金针菇", additionalPrice: 0 },
+        { name: "Tofu", subname: "豆腐", additionalPrice: 1 },
+        { name: "Beef", subname: "牛肉", additionalPrice: 3 },
+        { name: "Steamed Rice", subname: "白米饭", additionalPrice: 0 },
+        { name: "Brown Rice", subname: "糙米饭", additionalPrice: 1 },
+        { name: "Fried Noodles", subname: "炒面", additionalPrice: 2 },
+      ],
+      minOptions: 2,
+      maxOptions: 5,
+    },
+    {
+      productId: "cmjrx4pce000204kz0per675t",
+      required: true,
+      name: "Protein Choice",
+      subname: "主料",
+      options: [
+        { name: "Beef", subname: "牛肉", additionalPrice: 2 },
+        { name: "Shrimp", subname: "虾", additionalPrice: 2 },
+        { name: "Pork", subname: "猪肉", additionalPrice: 1 },
+        { name: "Chicken", subname: "鸡肉", additionalPrice: 1 },
+        { name: "Vegetable & Egg", subname: "蔬菜 & 鸡蛋", additionalPrice: 0 },
+        { name: "Vegetable", subname: "蔬菜", additionalPrice: 0 },
+      ],
+      maxOptions: 2,
+    },
+    {
+      productId: "cmjrx4pce000204kz0per675t",
+      required: false,
+      name: "Remove",
+      subname: "去除配料",
+      options: [
+        { name: "No Coriander", subname: "不要香菜", additionalPrice: 0 },
+        { name: "No Green Onion", subname: "不要小葱", additionalPrice: 0 },
+        { name: "No Onion", subname: "不要洋葱", additionalPrice: 0 },
+        { name: "No Soy Sauce", subname: "不要酱油", additionalPrice: 0 },
+      ],
     },
   ],
   products: [
     {
       slug: "century-eggs-with-chili-dressing",
       name: "Century Eggs With Chili Dressing",
-      nameChinese: "剁椒皮蛋",
-      category: "Starters",
+      subname: "剁椒皮蛋",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Silky preserved duck eggs topped with a savory and spicy chopped chili dressing.",
       image: "/image/food/Starters/Century Eggs with Chili Dressing.jpg",
@@ -31,8 +142,8 @@ const sampleData = {
     {
       slug: "mouth-watering-chicken",
       name: "Mouth-Watering Chicken",
-      nameChinese: "口水鸡",
-      category: "Starters",
+      subname: "口水鸡",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Tender poached chicken drenched in a signature Sichuan chili oil sauce with peanuts and sesame.",
       image: "/image/food/Starters/Mouth-watering Chicken.png",
@@ -43,8 +154,8 @@ const sampleData = {
     {
       slug: "pickled-chicken-feet-with-wild-chili",
       name: "Pickled Chicken Feet With Wild Chili",
-      nameChinese: "泡椒凤爪",
-      category: "Starters",
+      subname: "泡椒凤爪",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Crunchy chicken feet pickled with spicy wild peppers for a refreshing, tangy kick.",
       image: "/image/food/Starters/Pickled Chicken Feet with Wild Chili.jpg",
@@ -55,8 +166,8 @@ const sampleData = {
     {
       slug: "sichuan-cold-spicy-rabbit",
       name: "Sichuan Cold Spicy Rabbit",
-      nameChinese: "自贡冷吃兔",
-      category: "Starters",
+      subname: "自贡冷吃兔",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Authentic Zigong-style diced rabbit meat, chewy and infused with aromatic spices and chilies.",
       image: "/image/food/Starters/Sichuan Cold Spicy Rabbit.jpg",
@@ -67,8 +178,8 @@ const sampleData = {
     {
       slug: "sliced-pork-with-garlic-sauce",
       name: "Sliced Pork With Garlic Sauce",
-      nameChinese: "蒜泥白肉",
-      category: "Starters",
+      subname: "蒜泥白肉",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Thinly sliced pork belly served with a rich, aromatic garlic soy sauce and chili oil.",
       image: "/image/food/Starters/Sliced Pork with Garlic Sauce.png",
@@ -79,8 +190,8 @@ const sampleData = {
     {
       slug: "steamed-egg-custard",
       name: "Steamed Egg Custard",
-      nameChinese: "滋润蒸蛋羹",
-      category: "Starters",
+      subname: "滋润蒸蛋羹",
+      categoryId: "cmjrvvn4f000104kz0tha3e2s",
       description:
         "Silky smooth, melt-in-your-mouth steamed eggs seasoned with a hint of light soy sauce.",
       image: "/image/food/Starters/Steamed Egg Custard.jpg",
@@ -91,8 +202,8 @@ const sampleData = {
     {
       slug: "apple-green-tea",
       name: "Apple Green Tea",
-      nameChinese: "苹果绿茶",
-      category: "Drinks",
+      subname: "苹果绿茶",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "A refreshing blend of premium green tea and the crisp, sweet flavor of fresh apples.",
       image: "/image/food/Drinks/Apple Green Tea.jpg",
@@ -103,8 +214,8 @@ const sampleData = {
     {
       slug: "buttercream-phoenix-dancong-oolong",
       name: "Buttercream Phoenix Dancong Oolong",
-      nameChinese: "白脱奶油鸭屎香",
-      category: "Drinks",
+      subname: "白脱奶油鸭屎香",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "Floral Phoenix Dancong Oolong tea topped with a rich, velvety layer of buttercream foam.",
       image: "/image/food/Drinks/Buttercream Phoenix Dancong Oolong.jpg",
@@ -115,8 +226,8 @@ const sampleData = {
     {
       slug: "hojicha-brown-sugar-latte",
       name: "Hojicha Brown Sugar Latte",
-      nameChinese: "焙茶黑糖奶",
-      category: "Drinks",
+      subname: "焙茶黑糖奶",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "Roasted Japanese green tea paired with caramelized brown sugar and creamy milk.",
       image: "/image/food/Drinks/Hojicha Brown Sugar Latte.jpg",
@@ -127,8 +238,8 @@ const sampleData = {
     {
       slug: "hojicha-frappe",
       name: "Hojicha Frappé",
-      nameChinese: "焙茶茶冰乐",
-      category: "Drinks",
+      subname: "焙茶茶冰乐",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "A chilled, blended treat featuring the deep, nutty aroma of roasted hojicha tea.",
       image: "/image/food/Drinks/Hojicha Frappé.jpg",
@@ -139,8 +250,8 @@ const sampleData = {
     {
       slug: "matcha-frappe",
       name: "Matcha Frappé",
-      nameChinese: "抹茶茶冰乐",
-      category: "Drinks",
+      subname: "抹茶茶冰乐",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "A classic icy blend of premium Japanese matcha and creamy milk, topped with a hint of sweetness.",
       image: "/image/food/Drinks/Matcha Frappé.jpg",
@@ -151,8 +262,8 @@ const sampleData = {
     {
       slug: "molten-chocolate-cocoa",
       name: "Molten Chocolate Cocoa",
-      nameChinese: "熔岩可可",
-      category: "Drinks",
+      subname: "熔岩可可",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "Indulgent, rich dark chocolate cocoa with a velvety smooth texture.",
       image: "/image/food/Drinks/Molten Chocolate Cocoa.jpg",
@@ -163,8 +274,8 @@ const sampleData = {
     {
       slug: "waxberry-tea-frappe",
       name: "Waxberry Tea Frappé",
-      nameChinese: "杨梅茶冰乐",
-      category: "Drinks",
+      subname: "杨梅茶冰乐",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "Sweet and tangy waxberry blended with premium tea and ice for a summer refresher.",
       image: "/image/food/Drinks/Waxberry Tea Frappé.jpg",
@@ -175,8 +286,8 @@ const sampleData = {
     {
       slug: "yuzu-lime-tea",
       name: "Yuzu Lime Tea",
-      nameChinese: "柚子青柠茶",
-      category: "Drinks",
+      subname: "柚子青柠茶",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "A zesty and invigorating tea combining citrusy yuzu and fresh lime slices.",
       image: "/image/food/Drinks/Yuzu Lime Tea.jpg",
@@ -187,8 +298,8 @@ const sampleData = {
     {
       slug: "yuzu-matcha-frappe",
       name: "Yuzu Matcha Frappé",
-      nameChinese: "柚子抹茶冰",
-      category: "Drinks",
+      subname: "柚子抹茶冰",
+      categoryId: "cmjrvwdzc000104jxac0d29lj",
       description:
         "A unique fusion of earthy matcha and bright, citrusy yuzu in a blended icy format.",
       image: "/image/food/Drinks/Yuzu Matcha Frappé.jpg",
@@ -199,8 +310,8 @@ const sampleData = {
     {
       slug: "bingfen-with-snow-fungus",
       name: "Bingfen With Snow Fungus",
-      nameChinese: "银耳冰粉",
-      category: "Desserts",
+      subname: "银耳冰粉",
+      categoryId: "cmjrvwbcc000004jxgyjfhprg",
       description:
         "Traditional Sichuan ice jelly served with nutritious snow fungus and sweet syrup.",
       image: "/image/food/Desserts/Bingfen with Snow Fungus.jpg",
@@ -211,8 +322,8 @@ const sampleData = {
     {
       slug: "brown-sugar-sticky-rice-cake",
       name: "Brown Sugar Sticky Rice Cake",
-      nameChinese: "红糖糍粑",
-      category: "Desserts",
+      subname: "红糖糍粑",
+      categoryId: "cmjrvwbcc000004jxgyjfhprg",
       description:
         "Crispy fried glutinous rice cakes drizzled with rich brown sugar syrup and soybean powder.",
       image: "/image/food/Desserts/Brown Sugar Sticky Rice Cake.jpg",
@@ -223,8 +334,8 @@ const sampleData = {
     {
       slug: "sweet-fermented-rice-soup-with-tangyuan",
       name: "Sweet Fermented Rice Soup With Tangyuan",
-      nameChinese: "酒酿圆子",
-      category: "Desserts",
+      subname: "酒酿圆子",
+      categoryId: "cmjrvwbcc000004jxgyjfhprg",
       description:
         "A warm, comforting dessert soup made with fermented rice and chewy mini glutinous balls.",
       image: "/image/food/Desserts/Sweet Fermented Rice Soup with Tangyuan.jpg",
@@ -235,8 +346,8 @@ const sampleData = {
     {
       slug: "sweet-osmanthus-cake",
       name: "Sweet Osmanthus Cake",
-      nameChinese: "桂花糕",
-      category: "Desserts",
+      subname: "桂花糕",
+      categoryId: "cmjrvwbcc000004jxgyjfhprg",
       description:
         "Delicate and fragrant steamed rice cakes infused with the floral scent of osmanthus.",
       image: "/image/food/Desserts/Sweet Osmanthus Cake.jpg",
@@ -247,8 +358,8 @@ const sampleData = {
     {
       slug: "dry-fried-cabbage",
       name: "Dry-Fried Cabbage",
-      nameChinese: "手撕包菜",
-      category: "Greens",
+      subname: "手撕包菜",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Wok-seared cabbage with garlic, dried chilies, and a hint of vinegar for a smoky crunch.",
       image: "/image/food/Greens/Dry-fried Cabbage.jpg",
@@ -259,8 +370,8 @@ const sampleData = {
     {
       slug: "dry-fried-green-beans",
       name: "Dry-Fried Green Beans",
-      nameChinese: "干煸四季豆",
-      category: "Greens",
+      subname: "干煸四季豆",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Classic Sichuan-style green beans stir-fried with minced pork, garlic, and preserved vegetables.",
       image: "/image/food/Greens/Dry-fried Green Beans.jpg",
@@ -271,8 +382,8 @@ const sampleData = {
     {
       slug: "stir-fried-choy-sum",
       name: "Stir-Fried Choy Sum",
-      nameChinese: "清炒菜心",
-      category: "Greens",
+      subname: "清炒菜心",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Fresh and crunchy Choy Sum quickly stir-fried with garlic to preserve its natural sweetness.",
       image: "/image/food/Greens/Stir-fried Choy Sum.jpg",
@@ -283,8 +394,8 @@ const sampleData = {
     {
       slug: "stir-fried-eggplant-and-string-beans",
       name: "Stir-Fried Eggplant And String Beans",
-      nameChinese: "茄子炒豆角",
-      category: "Greens",
+      subname: "茄子炒豆角",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "A savory and popular combination of tender eggplant and snappy string beans in a garlic sauce.",
       image: "/image/food/Greens/Stir-fried Eggplant and String Beans.jpg",
@@ -295,8 +406,8 @@ const sampleData = {
     {
       slug: "stir-fried-indian-lettuce-with-black-bean-sauce",
       name: "Stir-Fried Indian Lettuce With Black Bean Sauce",
-      nameChinese: "豆豉油麦菜",
-      category: "Greens",
+      subname: "豆豉油麦菜",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Crisp Indian lettuce stir-fried with savory fermented black beans for an umami-rich flavor.",
       image:
@@ -308,8 +419,8 @@ const sampleData = {
     {
       slug: "stir-fried-loofah",
       name: "Stir-Fried Loofah",
-      nameChinese: "清炒丝瓜",
-      category: "Greens",
+      subname: "清炒丝瓜",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Soft and naturally sweet loofah stir-fried until tender, a light and healthy choice.",
       image: "/image/food/Greens/Stir-fried Loofah.jpg",
@@ -320,8 +431,8 @@ const sampleData = {
     {
       slug: "stir-fried-pea-shoots",
       name: "Stir-Fried Pea Shoots",
-      nameChinese: "清炒豆苗",
-      category: "Greens",
+      subname: "清炒豆苗",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Delicate and tender pea shoots quickly sautéed with garlic for a fresh, vibrant taste.",
       image: "/image/food/Greens/Stir-fried Pea Shoots.jpg",
@@ -332,8 +443,8 @@ const sampleData = {
     {
       slug: "stir-fried-water-spinach",
       name: "Stir-Fried Water Spinach",
-      nameChinese: "蒜蓉空心菜",
-      category: "Greens",
+      subname: "蒜蓉空心菜",
+      categoryId: "cmjrvw6xj000404kza1i7cblj",
       description:
         "Fresh water spinach wok-fried with plenty of garlic, a staple of Asian home cooking.",
       image: "/image/food/Greens/Stir-fried Water Spinach.jpg",
@@ -344,8 +455,8 @@ const sampleData = {
     {
       slug: "braised-soft-shell-turtle-in-brown-sauce",
       name: "Braised Soft-Shell Turtle In Brown Sauce",
-      nameChinese: "黄焖大甲鱼",
-      category: "Mains",
+      subname: "黄焖大甲鱼",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "A highly nutritious delicacy slow-braised in a rich, savory brown sauce until tender.",
       image: "/image/food/Mains/Braised Soft-shell Turtle in Brown Sauce.jpg",
@@ -356,8 +467,8 @@ const sampleData = {
     {
       slug: "bullfrog-with-fresh-chili",
       name: "Bullfrog With Fresh Chili",
-      nameChinese: "鲜椒霸王蛙",
-      category: "Mains",
+      subname: "鲜椒霸王蛙",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Succulent bullfrog pieces cooked in a fiery pot with fresh green and red chilies.",
       image: "/image/food/Mains/Bullfrog with Fresh Chili.png",
@@ -368,8 +479,8 @@ const sampleData = {
     {
       slug: "dry-fried-shrimp",
       name: "Dry-Fried Shrimp",
-      nameChinese: "干煸大虾",
-      category: "Mains",
+      subname: "干煸大虾",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Crispy, wok-fried jumbo prawns seasoned with Sichuan peppercorns and aromatic spices.",
       image: "/image/food/Mains/Dry-fried Shrimp.jpg",
@@ -380,8 +491,8 @@ const sampleData = {
     {
       slug: "oil-boiling-fish",
       name: "Oil Boiling Fish",
-      nameChinese: "油泼沸腾鱼",
-      category: "Mains",
+      subname: "油泼沸腾鱼",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Fresh fish fillets submerged in a fragrant, bubbling pool of spicy chili oil and peppercorns.",
       image: "/image/food/Mains/Oil Boiling Fish.jpg",
@@ -392,8 +503,8 @@ const sampleData = {
     {
       slug: "pork-meatballs-in-brown-sauce",
       name: "Pork Meatballs In Brown Sauce",
-      nameChinese: "红烧狮子头",
-      category: "Mains",
+      subname: "红烧狮子头",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Giant, succulent pork meatballs braised in a savory dark sauce, also known as Lion's Head.",
       image: "/image/food/Mains/Pork Meatballs in Brown Sauce.jpg",
@@ -404,8 +515,8 @@ const sampleData = {
     {
       slug: "sauerkraut-fish",
       name: "Sauerkraut Fish",
-      nameChinese: "老坛酸菜鱼",
-      category: "Mains",
+      subname: "老坛酸菜鱼",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Silky fish fillets poached in a tangy and mildly spicy broth with authentic Sichuan pickled greens.",
       image: "/image/food/Mains/Sauerkraut Fish.png",
@@ -416,8 +527,8 @@ const sampleData = {
     {
       slug: "sichuan-boiled-beef",
       name: "Sichuan Boiled Beef",
-      nameChinese: "水煮牛肉",
-      category: "Mains",
+      subname: "水煮牛肉",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Tender beef slices poached in a bold, numbing Sichuan chili broth and finished with hot oil.",
       image: "/image/food/Mains/Sichuan Boilded Beef.png",
@@ -426,10 +537,11 @@ const sampleData = {
       outOfStock: false,
     },
     {
+      id: "cmjrx3a4j000104kzfzmb2b4q",
       slug: "sichuan-boiled-fish",
       name: "Sichuan Boiled Fish",
-      nameChinese: "水煮鱼",
-      category: "Mains",
+      subname: "水煮鱼",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Delicate fish fillets simmered in a classic fiery Sichuan peppercorn and chili broth.",
       image: "/image/food/Mains/Sichuan Boiled Fish.png",
@@ -440,8 +552,8 @@ const sampleData = {
     {
       slug: "snow-beef-mapo-tofu",
       name: "Snow Beef Mapo Tofu",
-      nameChinese: "雪花牛肉麻婆豆腐",
-      category: "Mains",
+      subname: "雪花牛肉麻婆豆腐",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "A premium version of Mapo Tofu featuring marbled beef and silky tofu in a spicy bean sauce.",
       image: "/image/food/Mains/Snow Beef Mapo Tofu.jpg",
@@ -452,8 +564,8 @@ const sampleData = {
     {
       slug: "spicy-rabbit-in-hot-pot",
       name: "Spicy Rabbit In Hot Pot",
-      nameChinese: "自贡鲜锅兔",
-      category: "Mains",
+      subname: "自贡鲜锅兔",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Diced rabbit stir-fried with aromatic spices, lotus root, and chilies, served in a sizzling dry pot.",
       image: "/image/food/Mains/Spicy Rabbit in Hot Pot.png",
@@ -464,8 +576,8 @@ const sampleData = {
     {
       slug: "spicy-stew-with-beef-tripe-and-blood-curd",
       name: "Spicy Stew With Beef Tripe And Blood Curd",
-      nameChinese: "山城毛血旺",
-      category: "Mains",
+      subname: "山城毛血旺",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "A classic Sichuan stew with beef tripe, duck blood curd, and various ingredients in a spicy broth.",
       image: "/image/food/Mains/Spicy Stew with Beef Tripe and Blood Curd.png",
@@ -476,8 +588,8 @@ const sampleData = {
     {
       slug: "steamed-prawns-with-garlic-and-vermicelli",
       name: "Steamed Prawns With Garlic And Vermicelli",
-      nameChinese: "蒜蓉粉丝蒸大虾",
-      category: "Mains",
+      subname: "蒜蓉粉丝蒸大虾",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Butterflied jumbo prawns steamed with a rich garlic paste on a bed of silky vermicelli.",
       image: "/image/food/Mains/Steamed Prawns with Garlic and Vermicelli.jpg",
@@ -488,8 +600,8 @@ const sampleData = {
     {
       slug: "stir-fried-beef-with-black-pepper",
       name: "Stir-Fried Beef With Black Pepper",
-      nameChinese: "黑椒牛柳",
-      category: "Mains",
+      subname: "黑椒牛柳",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Tender strips of beef stir-fried with a bold black pepper sauce, onions, and bell peppers.",
       image: "/image/food/Mains/Stir-fried Beef with Black Pepper.png",
@@ -500,8 +612,8 @@ const sampleData = {
     {
       slug: "stir-fried-pork-kidney-and-liver",
       name: "Stir-Fried Pork Kidney And Liver",
-      nameChinese: "爆炒腰肝",
-      category: "Mains",
+      subname: "爆炒腰肝",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "A high-heat stir-fry of tender pork kidney and liver with ginger, garlic, and scallions.",
       image: "/image/food/Mains/Stir-fried Pork Kidney and Liver.png",
@@ -512,8 +624,8 @@ const sampleData = {
     {
       slug: "sweet-and-sour-pork-with-pineapple",
       name: "Sweet And Sour Pork With Pineapple",
-      nameChinese: "菠萝咕噜肉",
-      category: "Mains",
+      subname: "菠萝咕噜肉",
+      categoryId: "cmjrvvzkq000204kz271oh469",
       description:
         "Crispy pork nuggets tossed in a vibrant sweet and sour sauce with fresh pineapple and peppers.",
       image: "/image/food/Mains/Sweet and Sour Pork with Pineapple.png",
@@ -524,8 +636,8 @@ const sampleData = {
     {
       slug: "chengdu-dan-dan-noodles",
       name: "Chengdu Dan Dan Noodles",
-      nameChinese: "成都担担面",
-      category: "Staples",
+      subname: "成都担担面",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       description:
         "Famous Sichuan noodles topped with a savory minced pork sauce, peanuts, and chili oil.",
       image: "/image/food/Staples/Chengdu Dan Dan Noodles.jpg",
@@ -536,8 +648,8 @@ const sampleData = {
     {
       slug: "clear-jelly-noodles-in-chili-sauce",
       name: "Clear Jelly Noodles In Chili Sauce",
-      nameChinese: "川北凉粉",
-      category: "Staples",
+      subname: "川北凉粉",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       description:
         "Cool mung bean jelly noodles tossed in a bold, spicy, and tangy Sichuan dressing.",
       image: "/image/food/Staples/Clear Jelly Noodles in Chili Sauce.jpg",
@@ -548,8 +660,8 @@ const sampleData = {
     {
       slug: "cold-noodles-with-shredded-chicken",
       name: "Cold Noodles With Shredded Chicken",
-      nameChinese: "鸡丝凉面",
-      category: "Staples",
+      subname: "鸡丝凉面",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       description:
         "Chilled noodles topped with tender shredded chicken and a nutty, spicy sesame dressing.",
       image: "/image/food/Staples/Cold Noodles with Shredded Chicken.jpg",
@@ -558,10 +670,11 @@ const sampleData = {
       outOfStock: false,
     },
     {
+      id: "cmjrx4pce000204kz0per675t",
       slug: "fried-rice",
       name: "Fried Rice",
-      nameChinese: "经典炒饭",
-      category: "Staples",
+      subname: "经典炒饭",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       description:
         "Fragrant jasmine rice wok-fried with eggs, scallions, and choice of seasonal vegetables.",
       image: "/image/food/Staples/Fried Rice.jpg",
@@ -572,8 +685,8 @@ const sampleData = {
     {
       slug: "pork-wonton-in-hot-oil",
       name: "Pork Wonton In Hot Oil",
-      nameChinese: "红油抄手",
-      category: "Staples",
+      subname: "红油抄手",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       image: "/image/food/Staples/Wonton in Hot Oil.jpg",
       price: 8.88,
       isFeatured: false,
@@ -582,8 +695,8 @@ const sampleData = {
     {
       slug: "shrimp-wonton-in-hot-oil",
       name: "Shrimp Wonton In Hot Oil",
-      nameChinese: "鲜虾红油抄手",
-      category: "Staples",
+      subname: "鲜虾红油抄手",
+      categoryId: "cmjrvw3v9000304kzdggici7w",
       price: 9.88,
       isFeatured: false,
       outOfStock: false,

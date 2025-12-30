@@ -7,11 +7,14 @@ import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { signUpUser } from "@/lib/actions/user.actions";
+import PasswordInput from "@/components/shared/PasswordInput";
 
 const SignUpForm = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [data, action] = useActionState(signUpUser, {
     success: false,
@@ -38,8 +41,8 @@ const SignUpForm = () => {
             type="text"
             required
             placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+            value={form.name}
+            onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
           />
         </div>
         <div>
@@ -49,28 +52,20 @@ const SignUpForm = () => {
             type="email"
             required
             placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+            value={form.email}
+            onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
           />
         </div>
-        <div>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-          />
-        </div>
-        <div>
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            required
-            placeholder="Confirm Password"
-          />
-        </div>
+        <PasswordInput
+          password={form.password}
+          placeholder="Password"
+          onChange={(val) => setForm((p) => ({ ...p, password: val }))}
+        />
+        <PasswordInput
+          password={form.confirmPassword}
+          placeholder="Confirm Password"
+          onChange={(val) => setForm((p) => ({ ...p, confirmPassword: val }))}
+        />
         <div>
           <SignUpButton />
         </div>
@@ -79,7 +74,7 @@ const SignUpForm = () => {
         )}
         <div className="text-sm text-center text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/sign-in" target="_self" className="link">
+          <Link href="/signin" target="_self" className="link">
             Sign In
           </Link>
         </div>

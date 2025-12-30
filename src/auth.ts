@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
 export const config = {
   pages: {
@@ -44,14 +45,38 @@ export const config = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
     async session({ session, user, trigger, token }) {
       session.user.name = token.name;
+      session.user.role = token.role;
       if (trigger === "update") {
         session.user.name = user.name;
       }
       return session;
+    },
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.role = user.role;
+        // If user has no name then use the email
+        if (user.name === "NO_NAME") {
+          token.name = user.email!.split("@")[0];
+          // Update database to reflect the token name
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { name: token.name },
+          });
+        }
+      }
+      // Handle session updates
+      if (session?.user.name && trigger === "update") {
+        token.name = session.user.name;
+      }
+      return token;
     },
   },
 } satisfies NextAuthConfig;

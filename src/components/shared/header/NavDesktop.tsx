@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 const NavDesktop = async () => {
   const session = await auth();
   const firstName = session?.user?.name?.toUpperCase().split(" ")[0] || "User";
+  const isAdmin = session?.user?.role?.toLowerCase() === "admin" || false;
 
   return (
     <div className="hidden header-md:flex ml-auto items-center">
@@ -23,15 +24,8 @@ const NavDesktop = async () => {
         <NavigationMenuList className="flex flex-wrap items-center gap-x-4">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link href="/">
-                <span className={NAV_TEXT_STYLE}>Home</span>
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
               <Link href="/order">
-                <span className={NAV_TEXT_STYLE}>Order</span>
+                <span className={NAV_TEXT_STYLE}>Order Now</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -69,11 +63,13 @@ const NavDesktop = async () => {
                   Hi, {firstName}
                 </span>
                 <ul className="grid gap-2">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link href="/admin">Admin</Link>
-                    </NavigationMenuLink>
-                  </li>
+                  {isAdmin && (
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link href="/admin">Admin</Link>
+                      </NavigationMenuLink>
+                    </li>
+                  )}
                   <li>
                     <NavigationMenuLink asChild>
                       <Link href="/user/orders">Order History</Link>

@@ -3,8 +3,12 @@ import sampleData from "./sample-data";
 import { prisma } from "./prisma";
 
 async function main() {
+  await prisma.category.deleteMany();
+  await prisma.category.createMany({ data: sampleData.categorys });
   await prisma.product.deleteMany();
   await prisma.product.createMany({ data: sampleData.products });
+  await prisma.customization.deleteMany();
+  await prisma.customization.createMany({ data: sampleData.customizations });
   await prisma.account.deleteMany();
   await prisma.session.deleteMany();
   await prisma.verificationToken.deleteMany();

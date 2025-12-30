@@ -1,7 +1,5 @@
 export const COPYRIGHT = "Jiaxuan WU (Jaycee)";
 export const APP_NAME = "Moonlit Sichuan";
-export const SERVER_URL =
-  process.env.PUBLIC_SERVER_URL || "http://localhost:3000";
 export const WECHAT_URL = "https://mp.weixin.qq.com/s/3WjGIkeRn5RyUXMZHEJ-VQ";
 export const XIAOHONGSHU_URL = "https://xhslink.com/m/4KUzI4KAPgb";
 export const DOUYIN_URL = "https://v.douyin.com/rPx1f9pzFQQ/";
@@ -10,14 +8,6 @@ export const FACEBOOK_URL = "https://www.facebook.com/jiaxuan.wu.547/";
 export const EMAIL = "contact@moonlit.com";
 export const PHONE = "+12223334444";
 export const PHONE_DISPLAY = "+1 (222) 333-4444";
-export const MENU_CATEGORIES = [
-  "Starters",
-  "Mains",
-  "Staples",
-  "Greens",
-  "Desserts",
-  "Drinks",
-];
 export const LOCATIONS = [
   {
     name: "Mountain View",

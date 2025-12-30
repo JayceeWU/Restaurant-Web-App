@@ -1,6 +1,6 @@
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
-
+import { Toaster } from "@/components/ui/sonner";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -10,6 +10,7 @@ export default function RootLayout({
     <div className="flex h-screen flex-col">
       <Header />
       <main className="flex-1 wrapper pt-18">{children}</main>
+      <Toaster />
       <Footer />
     </div>
   );
