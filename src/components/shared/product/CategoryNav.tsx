@@ -2,18 +2,22 @@
 
 import { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { Cormorant_Garamond } from "next/font/google";
 import { Button } from "@/components/ui/button";
+import { Cormorant_Garamond } from "next/font/google";
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: "600",
 });
 
-interface CategoryNavProps {
+const CategoryNav = ({
+  categories,
+  fontAdj,
+  centerText,
+}: {
   categories: string[];
-}
-
-const CategoryNav = ({ categories }: CategoryNavProps) => {
+  fontAdj: boolean;
+  centerText: boolean;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Featured");
   useEffect(() => {
@@ -69,7 +73,12 @@ const CategoryNav = ({ categories }: CategoryNavProps) => {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`relative z-50 flex items-center bg-background justify-center md:justify-start w-full gap-4 pl-6 py-4 font-bold uppercase cursor-pointer ${cormorant.className}`}
+        className={`
+          relative z-50 flex items-center bg-background tracking-wider 
+          md:justify-start w-full gap-4 pl-6 py-4 font-bold uppercase cursor-pointer 
+          ${centerText ? `justify-center ` : `justify-start `}
+          ${fontAdj && cormorant.className}
+          `}
       >
         <span className="md:hidden">{activeCategory}</span>
         <span className="md:hidden">
@@ -94,8 +103,9 @@ const CategoryNav = ({ categories }: CategoryNavProps) => {
                   variant="ghost"
                   onClick={() => scrollToSection(category)}
                   className={`
-                  w-full justify-start text-xl cursor-pointer 
-                  ${cormorant.className}
+                  w-full text-xl cursor-pointer py-6 tracking-wider 
+                  ${centerText ? `justify-center ` : `justify-start `}
+                  ${fontAdj && cormorant.className}
                   ${isActive ? "border border-stone-400" : ""}
                   `}
                 >

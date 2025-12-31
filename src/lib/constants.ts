@@ -8,6 +8,7 @@ export const FACEBOOK_URL = "https://www.facebook.com/jiaxuan.wu.547/";
 export const EMAIL = "contact@moonlit.com";
 export const PHONE = "+12223334444";
 export const PHONE_DISPLAY = "+1 (222) 333-4444";
+export const TAXRATE = 0.9;
 export const LOCATIONS = [
   {
     name: "Mountain View",

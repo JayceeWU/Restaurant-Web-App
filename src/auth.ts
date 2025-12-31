@@ -4,9 +4,12 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+
+import { authConfig } from "./auth.config";
 
 export const config = {
+  ...authConfig,
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/signin",
     error: "/signin",
@@ -15,7 +18,6 @@ export const config = {
     strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       credentials: {
@@ -45,10 +47,7 @@ export const config = {
         return null;
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    ...authConfig.providers,
   ],
   callbacks: {
     async session({ session, user, trigger, token }) {
@@ -78,6 +77,7 @@ export const config = {
       }
       return token;
     },
+    ...authConfig.callbacks,
   },
 } satisfies NextAuthConfig;
 

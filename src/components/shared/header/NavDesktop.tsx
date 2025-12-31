@@ -24,7 +24,7 @@ const NavDesktop = async () => {
         <NavigationMenuList className="flex flex-wrap items-center gap-x-4">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link href="/order">
+              <Link href="/order/menu">
                 <span className={NAV_TEXT_STYLE}>Order Now</span>
               </Link>
             </NavigationMenuLink>
@@ -72,7 +72,7 @@ const NavDesktop = async () => {
                   )}
                   <li>
                     <NavigationMenuLink asChild>
-                      <Link href="/user/orders">Order History</Link>
+                      <Link href="/order/history">Order History</Link>
                     </NavigationMenuLink>
                   </li>
                   <li>

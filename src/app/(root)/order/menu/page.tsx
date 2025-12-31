@@ -1,31 +1,27 @@
-import MenuList from "./MenuList";
+import ProductList from "@/components/shared/product/ProductList";
+import CategoryNav from "@/components/shared/product/CategoryNav";
+import FeatureItems from "@/components/shared/product/FeatureItems";
 import {
   getAllProducts,
   getAllCategories,
 } from "@/lib/actions/product.actions";
-import CategoryNav from "@/components/shared/product/CategoryNav";
 
-export const metadata = {
-  title: "Menu",
-};
-
-const Menu = async () => {
+const OrderMenu = async () => {
   const allProducts = await getAllProducts();
   const allCategories = await getAllCategories();
   return (
     <div className="md:flex md:gap-8 md:px-10 xl:px-28 mx-auto">
-      <aside className="contents md:block md:w-60 md:shrink-0">
+      <aside className="contents md:block md:w-30 lg:w-50 md:shrink-0">
         <CategoryNav
           categories={["Featured", ...allCategories]}
-          fontAdj={true}
-          centerText={true}
+          fontAdj={false}
+          centerText={false}
         />
       </aside>
-      <main className="flex-1 space-y-12 md:py-8">
+      <main className="flex-1 min-w-0 space-y-6 md:py-8">
         <div id="section-featured">
-          <MenuList
+          <FeatureItems
             products={allProducts.filter((product) => product.isFeatured)}
-            category="Featured"
           />
         </div>
         {allCategories.map((category) => (
@@ -33,7 +29,7 @@ const Menu = async () => {
             id={`section-${category.toLowerCase().replace(/\s+/g, "-")}`}
             key={category}
           >
-            <MenuList
+            <ProductList
               products={allProducts.filter(
                 (product) => product.category === category,
               )}
@@ -46,4 +42,4 @@ const Menu = async () => {
   );
 };
 
-export default Menu;
+export default OrderMenu;

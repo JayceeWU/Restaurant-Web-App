@@ -52,7 +52,7 @@ const NavMobile = async () => {
             )}
             <SheetClose asChild>
               <Button asChild variant="ghost" className="w-full justify-center">
-                <Link href="/order">Order Now</Link>
+                <Link href="/order/menu">Order Now</Link>
               </Button>
             </SheetClose>
             {session && (
@@ -62,7 +62,7 @@ const NavMobile = async () => {
                   variant="ghost"
                   className="w-full justify-center"
                 >
-                  <Link href="/order-history">Order History</Link>
+                  <Link href="/order/history">Order History</Link>
                 </Button>
               </SheetClose>
             )}
