@@ -1,11 +1,12 @@
 "use server";
 
-import { signInFormSchema, signUpFormSchema } from "../validators";
-import { signIn, signOut } from "@/auth";
+import { shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../validators";
+import { auth, signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { prisma } from "@/db/prisma";
 import { hash } from "bcrypt-ts-edge";
 import { formatError } from "../utils";
+import { ShippingAddress } from "@/types";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(
@@ -29,13 +30,9 @@ export async function signInWithCredentials(
 
 // Sign user out
 export async function signOutUser() {
-  // // get current users cart and delete it so it does not persist to next user
   // const currentCart = await getMyCart();
-
   // if (currentCart?.id) {
   //   await prisma.cart.delete({ where: { id: currentCart.id } });
-  // } else {
-  //   console.warn('No cart found for deletion.');
   // }
   await signOut();
 }
@@ -67,5 +64,38 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
       throw error;
     }
     return { success: false, message: formatError(error, "Email") };
+  }
+}
+
+export async function getUserById() {
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) throw new Error('Unauthorized');
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+  if (!user) throw new Error('User not found');
+  return user;
+}
+
+// Update the user's address
+export async function updateUserAddress(data: ShippingAddress) {
+  try {
+    const session = await auth();
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+    if (!currentUser) throw new Error('User not found');
+    const address = shippingAddressSchema.parse(data);
+    await prisma.user.update({
+      where: { id: currentUser.id },
+      data: { address },
+    });
+    return {
+      success: true,
+      message: 'User updated successfully',
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error, "") };
   }
 }

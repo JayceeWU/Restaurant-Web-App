@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
-import { Prisma } from "@/generated/prisma/client";
 
 const currency = z
   .union([z.string(), z.number()])
@@ -9,7 +8,6 @@ const currency = z
     (s) => /^\d+(\.\d{2})$/.test(s),
     "Price must have exactly two decimal places",
   )
-  .transform((s) => new Prisma.Decimal(s));
 
 // Inserting product customization options
 export const productCustomizationOptionsSchema = z.object({
@@ -84,4 +82,11 @@ export const insertCartSchema = z.object({
   items: z.array(cartItemSchema),
   sessionCartId: z.string().min(1, "Session cart id is required"),
   userId: z.string().optional().nullable(),
+});
+
+export const shippingAddressSchema = z.object({
+  fullName: z.string().min(3, 'Name must be at least 3 characters'),
+  streetAddress: z.string().min(3, 'Address must be at least 3 characters'),
+  city: z.string().min(3, 'City must be at least 3 characters'),
+  postalCode: z.string().min(3, 'Postal code must be at least 3 characters'),
 });

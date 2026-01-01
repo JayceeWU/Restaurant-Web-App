@@ -4,6 +4,7 @@ import { Product } from "@/types/index";
 import {
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Accordion,
@@ -39,7 +40,6 @@ const ProductCardContent = ({ product }: { product: Product }) => {
         <DialogTitle className="uppercase">{product.name}</DialogTitle>
       </DialogHeader>
       <div className="overflow-y-auto flex-1 pr-2">
-        <div className="flex flex-col">
         {product.image && (
           <div className="relative w-full h-48 overflow-hidden mb-4">
             <Image
@@ -52,10 +52,11 @@ const ProductCardContent = ({ product }: { product: Product }) => {
             />
           </div>
         )}
+        <DialogDescription className="flex flex-col">
           <ProductPrice value={Number(product.price)} />
           {product.subname && <span>{product.subname}</span>}
           {product.description && <span>{product.description}</span>}
-        </div>
+        </DialogDescription>
         {product.customizations && (
           <Accordion type="single" collapsible className="w-full">
             {product.customizations.map((c) => (
@@ -89,14 +90,21 @@ const ProductCardContent = ({ product }: { product: Product }) => {
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col">
                   {c.options.map((option, index) => (
-                    <div
-                      key={option.name}
-                      onClick={() => handleOptionSelect(c.name, option.name)}
-                      className="flex flex-col"
-                    >
+                    <div key={option.name} className="flex flex-col">
                       <div className="flex items-center gap-3 p-3">
-                        <Checkbox id={option.name} />
-                        <Label htmlFor={option.name} className="w-full">
+                        <Checkbox
+                          id={option.name}
+                          onClick={() =>
+                            handleOptionSelect(c.name, option.name)
+                          }
+                        />
+                        <Label
+                          htmlFor={option.name}
+                          className="w-full"
+                          onClick={() =>
+                            handleOptionSelect(c.name, option.name)
+                          }
+                        >
                           <div className="flex justify-between w-full">
                             <span className="text-sm">
                               {option.name}

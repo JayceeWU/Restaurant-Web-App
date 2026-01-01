@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
-
+import { cookies } from "next/headers";
 import { authConfig } from "./auth.config";
 
 export const config = {
@@ -38,6 +38,7 @@ export const config = {
           );
           if (isMatch) {
             return {
+              id: user.id,
               email: user.email,
               name: user.name,
               role: user.role,
@@ -51,6 +52,7 @@ export const config = {
   ],
   callbacks: {
     async session({ session, user, trigger, token }) {
+      session.user.id = token.id as string;
       session.user.name = token.name;
       session.user.role = token.role;
       if (trigger === "update") {
@@ -60,15 +62,26 @@ export const config = {
     },
     async jwt({ token, user, trigger, session }) {
       if (user) {
+        token.id = user.id;
         token.role = user.role;
-        // If user has no name then use the email
-        if (user.name === "NO_NAME") {
-          token.name = user.email!.split("@")[0];
-          // Update database to reflect the token name
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { name: token.name },
-          });
+        // update user's cart
+        if (trigger === "signIn" || trigger === "signUp") {
+          const cookiesObject = await cookies();
+          const sessionCartId = cookiesObject.get("sessionCartId")?.value;
+          if (sessionCartId) {
+            const sessionCart = await prisma.cart.findFirst({
+              where: { sessionCartId },
+            });
+            if (sessionCart) {
+              await prisma.cart.deleteMany({
+                where: { userId: user.id },
+              });
+              await prisma.cart.update({
+                where: { id: sessionCart.id },
+                data: { userId: user.id },
+              });
+            }
+          }
         }
       }
       // Handle session updates

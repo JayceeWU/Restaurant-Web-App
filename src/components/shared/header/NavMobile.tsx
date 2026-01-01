@@ -4,14 +4,12 @@ import { Menu, UserIcon } from "lucide-react";
 import ModeToggle from "./ModeToggle";
 import {
   Sheet,
-  SheetDescription,
   SheetContent,
   SheetTitle,
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
 import { APP_NAME } from "@/lib/constants";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { auth } from "@/auth";
 import { signOutUser } from "@/lib/actions/user.actions";
 
@@ -32,13 +30,11 @@ const NavMobile = async () => {
           <SheetContent
             side="right"
             className="flex h-dvh flex-col gap-2 overflow-y-auto p-4"
+            aria-describedby="Mobile navigation menu"
           >
             <SheetTitle className="text-center py-3">
               {session ? `Hi, ${firstName}` : APP_NAME}
             </SheetTitle>
-            <VisuallyHidden>
-              <SheetDescription>Mobile navigation menu</SheetDescription>
-            </VisuallyHidden>
             {isAdmin && (
               <SheetClose asChild>
                 <Button

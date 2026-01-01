@@ -5,6 +5,7 @@ import {
   getAllProducts,
   getAllCategories,
 } from "@/lib/actions/product.actions";
+import CheckoutButton from "@/components/shared/product/CheckoutButton";
 
 const OrderMenu = async () => {
   const allProducts = await getAllProducts();
@@ -37,6 +38,7 @@ const OrderMenu = async () => {
             />
           </div>
         ))}
+        <CheckoutButton />
       </main>
     </div>
   );
