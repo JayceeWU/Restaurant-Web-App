@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Product } from "@/types/index";
-import ProductPrice from "./ProductPrice";
+import ProductPrice from "@/components/shared/product/ProductPrice";
 import AddToCartRound from "./AddToCartRound";
 
 const ProductCardTrigger = ({ product }: { product: Product }) => {

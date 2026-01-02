@@ -1,14 +1,22 @@
-export const COPYRIGHT = "Jiaxuan WU (Jaycee)";
-export const APP_NAME = "Moonlit Sichuan";
+export const COPYRIGHT = process.env.COPYRIGHT || "Jiaxuan WU (Jaycee)";
+export const APP_NAME = process.env.APP_NAME || "Moonlit Sichuan";
+
+export const TAXRATE = 0.9;
+export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
+  ? process.env.PAYMENT_METHODS.split(", ")
+  : ["PayPal", "Stripe", "CashOnDelivery"];
+export const SENDER_EMAIL = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+
 export const WECHAT_URL = "https://mp.weixin.qq.com/s/3WjGIkeRn5RyUXMZHEJ-VQ";
 export const XIAOHONGSHU_URL = "https://xhslink.com/m/4KUzI4KAPgb";
 export const DOUYIN_URL = "https://v.douyin.com/rPx1f9pzFQQ/";
 export const INSTAGRAM_URL = "https://www.instagram.com/jayceejcc/";
 export const FACEBOOK_URL = "https://www.facebook.com/jiaxuan.wu.547/";
+
 export const EMAIL = "contact@moonlit.com";
 export const PHONE = "+12223334444";
 export const PHONE_DISPLAY = "+1 (222) 333-4444";
-export const TAXRATE = 0.9;
+
 export const LOCATIONS = [
   {
     name: "Mountain View",
@@ -46,6 +54,7 @@ export const LOCATIONS = [
     ],
   },
 ];
+
 export const ABOUT = [
   {
     title: "Boutique Sichuan Dining",

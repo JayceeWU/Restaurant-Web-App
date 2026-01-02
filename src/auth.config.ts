@@ -21,11 +21,7 @@ export const authConfig = {
   callbacks: {
     authorized({ request, auth }) {
       // Check if user is not authenticated and accessing a protected path
-      const protectedPaths = [
-        /\/order\/checkout\/shipping/,
-        /\/user\/(.*)/,
-        /\/admin/,
-      ];
+      const protectedPaths = [/\/user\/(.*)/, /\/admin/];
       const { pathname } = request.nextUrl;
       if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
       // Check for session cart cookie

@@ -3,6 +3,7 @@ import { prisma } from "@/db/prisma";
 import { convertToPlainObject } from "../utils";
 import { z } from "zod";
 import { productCustomizationOptionsSchema } from "@/lib/validators";
+
 // Get all products
 export async function getAllProducts() {
   const data = await prisma.product.findMany({
@@ -14,12 +15,18 @@ export async function getAllProducts() {
   });
   const formattedData = data.map((product) => ({
     ...product,
+    price: product.price.toString(),
     category: product.category?.name ?? null,
     customizations: product.customizations.map((c) => ({
       ...c,
-      options: c.options as unknown as z.infer<
-        typeof productCustomizationOptionsSchema
-      >[],
+      options: (
+        c.options as unknown as z.infer<
+          typeof productCustomizationOptionsSchema
+        >[]
+      ).map((option) => ({
+        ...option,
+        additionalPrice: option.additionalPrice.toString(),
+      })),
     })),
   }));
   return convertToPlainObject(formattedData);

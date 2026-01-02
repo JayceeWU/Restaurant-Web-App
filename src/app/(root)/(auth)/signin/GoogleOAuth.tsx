@@ -10,7 +10,7 @@ const GoogleOAuth = () => {
   const callbackUrl = searchParams.get("callbackUrl") || "/";
   return (
     <Button
-      className="w-full cursor-pointer"
+      className="w-full"
       variant="outline"
       onClick={() => signIn("google", { callbackUrl })}
     >

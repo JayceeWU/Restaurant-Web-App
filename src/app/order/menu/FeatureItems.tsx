@@ -10,8 +10,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import ProductCardContent from "./ProductCardContent";
 import Image from "next/image";
 import { Product } from "@/types/index";
-import ProductPrice from "./ProductPrice";
-import AddToCart from "./AddToCartRound";
+import ProductPrice from "@/components/shared/product/ProductPrice";
+import AddToCartRound from "./AddToCartRound";
 
 const FeatureItems = ({ products }: { products: Product[] }) => {
   return (
@@ -65,7 +65,7 @@ const FeatureItems = ({ products }: { products: Product[] }) => {
                                 </div>
                               </div>
                             </div>
-                            <AddToCart />
+                            <AddToCartRound />
                           </CardContent>
                         </Card>
                       </div>
