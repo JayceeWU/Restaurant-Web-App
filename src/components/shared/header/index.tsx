@@ -13,7 +13,7 @@ const cormorant = Cormorant_Garamond({
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b">
-      <div className="flex justify-between items-center py-4 px-4">
+      <div className="flex items-center py-4 px-4">
         <Link href="/" className="flex items-center space-x-2 shrink-0">
           <Image
             src="/image/logo.png"
@@ -33,11 +33,11 @@ const Header = () => {
             {APP_NAME}
           </span>
         </Link>
-        <div className="hidden header-md:block">
+        <NavMobile />
+        <div className="hidden header-md:flex ml-auto items-center gap-3">
+          <NavDesktop />
           <ModeToggle />
         </div>
-        <NavMobile />
-        <NavDesktop />
       </div>
     </header>
   );

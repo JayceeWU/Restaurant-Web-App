@@ -19,9 +19,9 @@ const NavDesktop = async () => {
   const isAdmin = session?.user?.role?.toLowerCase() === "admin" || false;
 
   return (
-    <div className="hidden header-md:flex ml-auto items-center">
-      <NavigationMenu className="max-w-full ml-6" viewport={false}>
-        <NavigationMenuList className="flex flex-wrap items-center gap-x-4">
+    <div className="flex items-center">
+      <NavigationMenu className="max-w-full" viewport={false}>
+        <NavigationMenuList className="flex flex-nowrap items-center gap-x-3 header-lg:gap-x-4">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link href="/order/menu">
