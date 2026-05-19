@@ -4,6 +4,8 @@ Moonlit Sichuan is a full-stack restaurant website built with Next.js. It presen
 
 This repository is the order-enabled version of the project.
 
+Current version live demo: https://moonlit-sichuan.vercel.app/
+
 The web version without the `order` functionality has been deployed on Vercel:
 
 - Live demo: https://restaurant-web-app-basic.vercel.app/
@@ -165,6 +167,10 @@ Before deploying:
 - Use a hosted PostgreSQL database such as Neon
 - Run production migrations with `npx prisma migrate deploy`
 - Keep PayPal sandbox credentials for testing and switch to live credentials only when production payments are ready
+
+Current deployed version:
+
+- Live demo: https://moonlit-sichuan.vercel.app/
 
 Related deployed version:
 
