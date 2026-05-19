@@ -13,14 +13,17 @@ import { auth } from "@/auth";
 import { signOutUser } from "@/lib/actions/user.actions";
 import { Button } from "@/components/ui/button";
 
+const AUTH_LINK_STYLE =
+  "inline-flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded-md border px-3 py-2 text-sm font-medium uppercase transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-1";
+
 const NavDesktop = async () => {
   const session = await auth();
   const firstName = session?.user?.name?.toUpperCase().split(" ")[0] || "User";
   const isAdmin = session?.user?.role?.toLowerCase() === "admin" || false;
 
   return (
-    <div className="flex items-center">
-      <NavigationMenu className="max-w-full" viewport={false}>
+    <div className="flex shrink-0 items-center gap-3">
+      <NavigationMenu className="max-w-full shrink-0" viewport={false}>
         <NavigationMenuList className="flex flex-nowrap items-center gap-x-3 header-lg:gap-x-4">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
@@ -50,7 +53,7 @@ const NavDesktop = async () => {
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          {session ? (
+          {session && (
             <NavigationMenuItem>
               <NavigationMenuTrigger>
                 <div className="flex items-center gap-2">
@@ -94,22 +97,19 @@ const NavDesktop = async () => {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-          ) : (
-            <NavigationMenuItem className="border rounded-md">
-              <NavigationMenuLink asChild>
-                <Link href="/signin">
-                  <div className="flex items-center gap-2">
-                    <UserIcon size={16} />
-                    <span className="uppercase text-sm font-medium">
-                      Sign In / Join
-                    </span>
-                  </div>
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
           )}
         </NavigationMenuList>
       </NavigationMenu>
+      {!session && (
+        <Link
+          href="/signin"
+          className={AUTH_LINK_STYLE}
+          aria-label="Sign In or Join"
+        >
+          <UserIcon size={16} />
+          <span>Sign In / Join</span>
+        </Link>
+      )}
     </div>
   );
 };
