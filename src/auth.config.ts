@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { NextResponse } from "next/server";
 
 export const authConfig = {
+  trustHost: true,
   pages: {
     signIn: "/signin",
     error: "/signin",
