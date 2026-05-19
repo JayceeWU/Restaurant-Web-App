@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ShippingAddress } from "@/types";
+import { DeliveryAddress } from "@/types";
 import { deliveryAddressSchema } from "@/lib/validators";
 import {
   Form,
@@ -20,7 +20,7 @@ import { ArrowRight, Loader } from "lucide-react";
 import { updateUserAddress } from "@/lib/actions/user.actions";
 import { toast } from "sonner";
 
-const AddressForm = ({ address }: { address: ShippingAddress }) => {
+const AddressForm = ({ address }: { address: DeliveryAddress }) => {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof deliveryAddressSchema>>({
     resolver: zodResolver(deliveryAddressSchema),

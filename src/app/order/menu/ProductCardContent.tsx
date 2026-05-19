@@ -40,6 +40,7 @@ const ProductCardContent = ({ product }: { product: Product }) => {
         item={{
           productId: product.id,
           qty: 1,
+          options: null,
         }}
       />
     </div>

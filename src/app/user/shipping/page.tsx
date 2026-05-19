@@ -1,8 +1,8 @@
 import AddressForm from "@/components/shared/address/AddressForm";
 import { getUserById } from "@/lib/actions/user.actions";
-import { ShippingAddress } from "@/types";
+import { DeliveryAddress } from "@/types";
 
-const defaultAddress: ShippingAddress = {
+const defaultAddress: DeliveryAddress = {
   fullName: "",
   streetAddress: "",
   city: "",
@@ -16,7 +16,7 @@ const ShipppingPage = async () => {
   //   redirect('/signin?callbackUrl=/order/checkout');
   // }
   const user = await getUserById();
-  const address = (user.address as ShippingAddress) || defaultAddress;
+  const address = (user.address as DeliveryAddress) || defaultAddress;
   return (
     <div>
       <AddressForm address={address} />

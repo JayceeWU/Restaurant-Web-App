@@ -110,10 +110,9 @@ export async function createOrder() {
         });
       }
       // Clear cart
-      await tx.cart.update({
-        where: { id: cart.id },
-        data: {
-          items: [],
+      await tx.cartItem.deleteMany({
+        where: {
+          cartId: cart.id,
         },
       });
       return insertedOrder.id;
@@ -137,7 +136,7 @@ export async function getOrderById(orderId: string) {
       id: orderId,
     },
     include: {
-      orderitems: true,
+      orderItems: true,
       user: { select: { name: true, email: true } },
     },
   });
@@ -224,7 +223,7 @@ export async function updateOrderToPaid({
 }) {
   const order = await prisma.order.findFirst({
     where: { id: orderId },
-    include: { orderitems: true },
+    include: { orderItems: true },
   });
   if (!order) throw new Error("Order not found");
   if (order.isPaid) throw new Error("Order is already paid");
@@ -241,7 +240,7 @@ export async function updateOrderToPaid({
   const updatedOrder = await prisma.order.findFirst({
     where: { id: orderId },
     include: {
-      orderitems: true,
+      orderItems: true,
       user: { select: { name: true, email: true } },
     },
   });

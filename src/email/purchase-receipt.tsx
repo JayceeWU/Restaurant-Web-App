@@ -27,25 +27,23 @@ PurchaseReceiptEmail.PreviewProps = {
       email: "test@test.com",
     },
     paymentMethod: "Stripe",
-    shippingAddress: {
+    deliveryAddress: {
       fullName: "John Doe",
       streetAddress: "123 Main st",
       city: "New York",
       postalCode: "10001",
-      country: "US",
     },
     createdAt: new Date(),
+    subtotal: "80",
+    deliveryFee: "10",
+    tax: "10",
     totalPrice: "100",
-    taxPrice: "10",
-    shippingPrice: "10",
-    itemsPrice: "80",
-    orderitems: sampleData.products.map((x) => ({
+    orderItems: sampleData.products.map((x) => ({
       name: x.name,
-      orderId: "123",
-      productId: "123",
+      productId: x.slug,
       slug: x.slug,
-      qty: x.stock,
-      image: x.images[0],
+      qty: 1,
+      image: x.image ?? null,
       price: x.price.toString(),
     })),
     isDelivered: true,
@@ -103,19 +101,21 @@ export default function PurchaseReceiptEmail({ order }: OrderInformationProps) {
               </Row>
             </Section>
             <Section className="border border-solid border-gray-500 rounded-lg p-4 md:p-6 my-4">
-              {order.orderitems.map((item) => (
+              {order.orderItems.map((item) => (
                 <Row key={item.productId} className="mt-8">
                   <Column className="w-20">
-                    <Img
-                      width="80"
-                      alt={item.name}
-                      className="rounded"
-                      src={
-                        item.image.startsWith("/")
-                          ? `${process.env.NEXT_PUBLIC_SERVER_URL}${item.image}`
-                          : item.image
-                      }
-                    />
+                    {item.image && (
+                      <Img
+                        width="80"
+                        alt={item.name}
+                        className="rounded"
+                        src={
+                          item.image.startsWith("/")
+                            ? `${process.env.NEXT_PUBLIC_SERVER_URL}${item.image}`
+                            : item.image
+                        }
+                      />
+                    )}
                   </Column>
                   <Column className="align-top">
                     {item.name} x {item.qty}
@@ -126,9 +126,9 @@ export default function PurchaseReceiptEmail({ order }: OrderInformationProps) {
                 </Row>
               ))}
               {[
-                { name: "Items", price: order.itemsPrice },
-                { name: "Tax", price: order.taxPrice },
-                { name: "Shipping", price: order.shippingPrice },
+                { name: "Items", price: order.subtotal },
+                { name: "Tax", price: order.tax },
+                { name: "Delivery", price: order.deliveryFee },
                 { name: "Total", price: order.totalPrice },
               ].map(({ name, price }) => (
                 <Row key={name} className="py-1">
